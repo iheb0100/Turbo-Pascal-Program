@@ -1,0 +1,25 @@
+0)Début proc tri_selection_
+1)pour i de 1 à 10-1 faire 
+    min<==i
+	pour j de i+1 à 10 faire 
+	 si(t[j]<t[min])alors
+	   min<==j
+	   ox<==t[min]
+	   t[min]<==t[j]
+	   t[j]<==ox
+	   fin si
+	   fin pour
+2)fin pour
+3)Fin tri_selection_
+##############Tri_selection_################################################################################################
+La methode de tri par selection utilise l'algorithme formel suivant :
+1-Placer dans l'élément d'indice 1 du tableau T la plus petite valeur présente dans le tableau et mettre à sa place 
+l'ancienne valuer de t[1].
+2-placer dans l'élément d'indice 2 de T la plus petite valeur présente dans la tranche de tableau T[2..N]
+3- placer dans l'élément d'indice 3 de T la plus petite valeur présentz dans la tranche de tableau T[3..N]
+4-et ainsi de suite jusqu'a letape(N-1);
+############################################################################################################################
+principe:
+Cherecher la position du minimum dans la partie de tableau commençant de la case i jusqu'a la case n et permutter le 
+minimum avec t[i]. 
+############################################################################################################################

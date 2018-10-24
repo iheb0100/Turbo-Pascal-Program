@@ -1,0 +1,26 @@
+0)Debut proc tri_bulle
+1)repéter
+    test<==faux
+	  Pour i de 1 à 10-1 faire 
+	     si(t[i]<t[i+1])alors
+		    ox<==t[i]
+			t[i]<==t[i+1]
+			t[i+1]<==ox
+			test<==vrai
+			  fin si
+			  fin pour
+ jusqu'a(test=faux);
+2)fin proc tri_bulle
+
+############Principe tri A bulle################################################################################################
+Lsa methode tri à bulles utilise l'algorithme formel suivant 
+L'algorithme tri à bulles coniste à comparer les differentes valeurs adjescentes Du tableau T, et à Les permuter
+ s'il ne sont pas dans le bon
+ordre .l'algorithme se déroule ainsi :
+1-Les deux premiers élément du tableau sont comparés ,si le premier élement est superieur au second , une permutation
+S'effecturer .
+2-Ensuite , sont comparés et éventuellement permutés les valeurs 2 et 3,3 et 4 jusqu'à(n-1) et n .
+3-Une fois cette étape achevés,il est certain que le dernier élèment du tableau est le plus grand . l'algorithme
+reprond donc pour classer les (n-1) élèment qui précedent .
+4-L'algorithme se termine quand il n'y a plus de permutations possibles .
+#####################################################################################################################################  
