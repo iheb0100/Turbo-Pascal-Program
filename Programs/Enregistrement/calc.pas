@@ -1,0 +1,96 @@
+program ex;
+uses wincrt ;
+type
+tab=array[1..50] of integer ;
+nb = record
+nob,car: integer ;
+sig:string[15];
+end;
+tab1= array[1..50] of nb;
+var
+n :integer ;
+t:tab;
+v:tab1;
+
+
+procedure remplir_v(var v:tab1; t:tab;n:integer);
+
+function carre(x: integer): integer;
+var
+c,u,d:integer;
+begin
+u:=x mod 10;
+d:=x mod 100 div 10;
+c:=x mod 1000 div 100 ;
+carre:=c*c+u*u+d*d;
+end;
+{--------------------------------------------}
+var
+i,k:integer;
+begin
+k:=0;
+for i:= 1 to n do
+begin
+With v[i] do
+begin
+if(t[i]>0)then
+begin
+k:=k+1;
+v[k].sig:='positif';
+end
+else
+begin
+k:=k+1;
+v[k].sig:='negatif';
+end;
+v[k].nob:=t[i];
+v[k].car:=carre(t[i]);
+end;
+end;
+end;
+
+
+procedure remplir(var t:tab; n: integer );
+var
+i: integer ;
+begin
+for i := 1 to n do
+begin
+Writeln('entrer un nombre ',i);
+readln(t[i]);
+end;
+end;
+
+
+procedure saisir(var n: integer);
+begin
+Writeln('La taille du tableau ');
+readln(n);
+end;
+
+procedure aff(t:tab;v:tab1;n: integer );
+var
+i,j: integer ;
+begin
+Writeln(' tableau dentier ');
+for i := 1 to n do
+begin
+Writeln(t[i]);
+end;
+Writeln('********************');
+for j:= 1 to n do
+begin
+with v[j] do
+begin
+Writeln('Nombre ',nob);
+writeln('Signre ',sig);
+Writeln('Carre ',car);
+end;
+end;
+end;
+BEGIN
+saisir(n);
+remplir(t,n);
+remplir_v(v,t,n);
+aff(t,v,n);
+end. 

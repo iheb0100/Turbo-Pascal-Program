@@ -1,0 +1,102 @@
+program voit ;
+uses wincrt ;
+type
+marque=(fiat,peugeot);
+voitu = record
+mat :string[30] ;
+mar : marque;
+age,com: word ;
+pri:real;
+end;
+
+vect= array[1..10] of voitu;
+var
+v: vect ;
+n: integer;
+
+
+procedure saisir_n(var n: integer);
+
+begin
+repeat
+writeln('Entrer la taille du vecteur ');
+readln(n);
+until(n in [1..10]) ;
+end;
+
+procedure saisir_e(var e : voitu);
+var
+choix : 1..2;
+begin
+with e do
+begin
+Write('entrer la matricule ');
+readln(mat);
+repeat
+Writeln('Marque ');
+writeln('1- fiat ');
+Writeln('2- peugeot');
+
+
+Readln(choix);
+until(choix in [1..2]);
+case choix of
+
+1:mar:=fiat ;
+2:mar:=peugeot;
+end ;
+Writeln('L''age ');
+readln(age);
+writeln('Le compteur ');
+readln(com);
+writeln('Le prix ');
+readln(pri);
+end;
+end;
+
+
+procedure remplir_v(var v: vect ; n: integer );
+var
+i: integer ;    e:voitu;
+begin
+for i := 1 to n do
+begin
+saisir_e(e);
+v[i]:=e;
+end;
+end;
+
+
+procedure aff(v: vect ; n: integer );
+var
+i : integer;
+mm:string[30];
+begin
+Writeln('Entrer la matricule ');
+readln(mm);
+for i:= 1 to n do
+begin
+if(mm=v[i].mat)then
+begin
+Writeln('************************');
+ With v[i] do
+begin 
+Writeln('La matricule',mat);
+   Writeln('Le prix ',pri:2:3);
+   Writeln('l''age ',age);
+   Writeln('Le compteur ' ,com);
+
+   end;
+   Writeln('*********************');
+   end;
+   end
+   else
+   Writeln('Sorry Not found ');
+  
+   end;
+
+   BEGIN
+   saisir_n(n);
+   remplir_v(v,n);
+   aff(v,n);
+   end.
