@@ -1,55 +1,84 @@
-program ex;
-uses wincrt ;
-type
-fiche= file of integer ;
-var
-f:fiche ;
+Program AymenDA;
+uses wincrt;
+Type
+fichier = file Of Integer;
+Var
+i,aux,a,b : Integer;
+f : fichier;
+test : Boolean;
 
+Procedure createfile(Var f : fichier);
+Begin
+Assign(f,'C:\New folder\test.dat');
+Rewrite(f);
+Close(f);
+End;
 
-procedure remp(var f:fiche );
-var
-n,p: integer ; c: char ;
-f1:fiche;
-begin
-assign(f,'c:\entier.dat');
-rewrite(f);
-seek(f,3);
-repeat
-Writeln('Entrere un nombre ');
-readln(n);
+Procedure FillFile(Var f : fichier);
+Var
+a : Integer;
+Begin
+Assign(f,'C:\New folder\test.dat');
+Reset(f);
+For i:=0 To 5 Do
+Begin
+Readln(a);
+Seek(f,i);
+Write(f,a);
+End;
+Close(f);
+End;
 
-write(f,n);
-p:=filepos(f);
-writeln('La position du pointeur',p); 
-Writeln('Continuez ');
-readln(c);
-until(c ='o');
-close(f);
-end;
+Procedure AffichFile(Var f : fichier);
+Var
+a : Integer;
+Begin
+Assign(f,'C:\New folder\test.dat');
+Reset(f);
+For i:=0 To (Filesize(f)-1) Do
+Begin
+Seek(f,i);
+read(f,a);
+Writeln(a);
+End;
+Close(f);
+End;
 
-procedure aff(var f:fiche );
-var
-n:integer;
-begin
-clrscr;
-reset(f);
-truncate(f);
-While not(eof(f))do
-begin
-writeln('Ala pos ',filepos(f));
-read(f,n);
-While(n=2)do
-begin
-writeln('nombre = ',n);
-n:=n-1;
-end;
-readln;
-end;
-seek(f,0);
+Procedure tri(Var f : fichier);
+Var
+a,b,i : Integer;
+Begin
+Assign(f,'C:\New folder\test.dat');
+Reset(f);
+Repeat
+test := True;
+For i:=0 To (Filesize(f)-2) Do
+Begin
+Seek(f,i);
+read(f,a);
 
-close(f); 
-end;
-begin
-Gotoxy(30,10);
-Writeln('*************************');
-end.
+Seek(f,i+1);
+read(f,b);
+
+If (a>b) Then
+Begin
+Seek(f,i);
+Write(f,b);
+Seek(f,i+1);
+Write(f,a);
+test := False;
+End;
+End;
+Until (test = True);
+Close(f);
+End;
+Begin
+createfile(f);
+FillFile(f);
+
+affichfile(f);
+Writeln('***************aprés le tri ya si hamad***************­*');
+tri(f);
+affichfile(f);
+Readln;
+End.

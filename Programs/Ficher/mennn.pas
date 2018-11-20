@@ -1,0 +1,44 @@
+program ex;
+uses wincrt ;
+var
+c :integer ;
+
+procedure menu1;
+begin
+writeln('**********Menu fichiers************');
+writeln('1-Crée une fichier ');
+writeln('2-Ouverture d''ne fichier ');
+writeln('3-Supprimer un fichier ');
+writeln('4-Fermer un fichier ');
+writeln('**************************');
+end;
+
+procedure menu2;
+begin
+writeln('*********Menu Edition**************');
+writeln('1-Ajouter Un film ');
+writeln('2-Modifier un film ');
+writeln('3-Chercher un fim ');
+writeln('4- Supprimer un film ');
+Writeln('***********************************')
+end;
+
+
+Procedure menu3 ;
+begin
+writeln('********Menu Quittez***************');
+Writeln('1-Sortir ');
+End;
+
+
+BEGIN
+repeat
+Writeln('Entere votre choix ');
+readln(c);
+case c of
+1:menu1;
+2:menu2;
+3:menu3;
+end;
+until not(c in [1..3]);
+end.

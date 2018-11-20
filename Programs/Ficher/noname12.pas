@@ -1,39 +1,75 @@
 program ex;
 uses wincrt ;
 type
-mat=array[1..6,1..10] of integer ;
+fichier=file of integer ;
 var
-f:text;
-a,i,j,k,c:integer;
-m:mat;
+f:fichier;
+
+
+procedure remplir(var f : fichier );
+var
+i,nb:integer ; 
 begin
-j:=0;
-assign(f,'c:\Source.txt');
-reset(f);
-i:=1;
-While(not(eof(f)))or(i=6)do
+rewrite(f);
+for i := 0 to 5 do
 begin
-read(f,a);
-j:=j+1 ;
-m[i,j]:=a;
-if(j=10)then
-begin
-j:=0;
-end;
-if(eoln(f)=true)then
-begin
-i:=i+1;
-end;
+Writeln('Enterer le nb ');
+readln(nb);
+seek(f,i);
+write(f,nb);
 end;
 close(f);
-
-For k := 1 to 6 do
-begin
-for c := 1 to 10 do
-begin
-write(m[k,c],'|');
-end;
-writeln;
 end;
 
-end.
+procedure tri(var f :fichier );
+var
+x,y,i,b,j,a: integer ;
+begin
+reset(f);
+for i := 0 to 4 do
+begin
+seek(f,i);
+read(f,a);
+ for j:= i+1 to 5 do
+ begin
+ seek(f,j);
+ read(f,b);
+ if(b<a)then
+ begin
+ seek(f,i);
+ write(f,b);
+ seek(f,j);
+ write(f,a);
+ a:=b;
+ end;
+ end;
+ end;
+ close(f);
+ end;
+
+
+ procedure aff(var f : fichier );
+ var
+ i,a: integer ;
+ begin
+ reset(f);
+ for i := 0 to 5 do
+ begin
+ read(f,a);
+ Write(a,'|');
+ end;
+ close(f);
+ end;
+
+
+ BEGIN
+ writeln('########################Ya Aymen Ahaya solution simple W mahiche twila ############################');
+ assign(f,'c:\file.dat');
+ remplir(f);
+ Writeln('Avant le tri ') ;
+ aff(f);
+ Writeln;
+ Writeln('Apressss le tri ');
+ tri(f);
+ aff(f);
+ END. 

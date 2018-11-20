@@ -1,0 +1,66 @@
+program ex ;
+uses wincrt ;
+var
+f:text ;
+
+
+procedure remplir(var f:text);
+var
+ch:string;
+begin
+rewrite(f);
+repeat
+writeln('entrer une phrase ');
+readln(ch);
+writeln(f,ch);
+until(ch='');
+close(f);
+end;
+
+{----------------------------------------------}
+
+procedure remplir_f2(var f:text);
+var
+i:char;
+j:integer; ch:string;
+nb:integer;
+f1:text;
+begin
+nb:=0;
+assign(f1,'c:\chaine.txt');
+rewrite(f1);
+for i:= 'A' to 'Z' do
+begin
+reset(f);
+while(not(eof(f)))do
+begin
+readln(f,ch);
+for j:= 1 to length(ch) do
+begin
+if(i=ch[j])then
+begin
+nb:=nb+1;
+end;
+end;
+end;
+writeln(f1,'la frequence de ',i,'est ',nb);
+nb:=0;
+
+close(f);
+end;
+close(f1);
+end;
+
+
+BEGIN
+assign(f,'c:\xxx.txt');
+remplir(f);
+remplir_f2(f);
+END.
+
+
+
+
+
+
+

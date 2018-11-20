@@ -1,0 +1,61 @@
+program ex;
+uses wincrt ;
+type
+mat = array[1..20,1..20] of integer;
+var
+m : mat ;
+n : integer ;
+
+
+Procedure saisir(var n : integer );
+begin
+repeat 
+Writeln('Entere la taille du matrice ');
+readln(n);
+until(n in [2..20]);
+end;
+
+Procedure remplir(var m :mat ; n: integer) ;
+var
+l,c :integer;
+Begin
+for l := 1 to n do
+begin
+for c := 1 to n do
+begin
+m[l,c]:=random(90)+10;
+end;end;
+end;
+
+Procedure aff(m: mat ; n: integer );
+var
+l,c:integer ;
+begin
+for l:= 1 to n do
+begin
+for c := 1 to n do
+begin
+Write(m[l,c]:5);
+end;
+writeln;
+end;
+end;
+
+Function som(m : mat ; n: integer ): integer ;
+var
+i,s : integer ;
+begin
+s:=0;
+for i:= 1 to n do
+begin
+s:=s+m[i,i]+m[i,n-i+1];
+end ;
+som:=s;
+end;
+
+BEGIN
+saisir(n);
+remplir(m,n);
+aff(m,n);
+Writeln('La somme ',som(m,n));
+END. 

@@ -1,79 +1,74 @@
 program ex;
 uses wincrt ;
-type
-car= file of char ;
 var
-f,f1,f2: car;
+f:text;
 
 
-procedure remplir(var f : car);
+procedure saisir_v(var f:text);
 var
-c:char ;
+c:char;
+vil:string;
 begin
+assign(f,'c:\ville.txt');
 rewrite(f);
-c:=' ';
-while(c<>'.')do
-begin
-Writeln('Entrer un caractere '); readln(c);
-if(upcase(c) in['A'..'Z']) then
-begin
-write(f,c);
-end;
-end;
+repeat
+writeln('Entrer la ville ');
+readln(vil);
+writeln(f,vil);
+writeln('Voulez vous continuez ');
+readln(c);
+Until(upcase(c) in ['N','n']);
 close(f);
 end;
 
-
-procedure rempli_f(var f,f1,f2:car);
+procedure aff(var f:text);
 var
-X:char;
+ch:string;
 begin
 reset(f);
-rewrite(f1);
-rewrite(f2);
-while(not(eof(f)))do
-begin
-read(f,X);
-if( upcase(X) in ['O','A','E','I','U','W','Y'])then
-begin
-write(f1,X);
-end
-else if(upcase(X) in ['S','Q','D','T','P','M','L','K','N','B','V','Z'])then
-begin
-write(f2,X);
-end;
-end;
-close(f);
-end;
-
-
-procedure aff(var f:car);
-var
-X:char ;
-begin
-reset(f);
-Writeln('Le contenu du fichiere ');
 While(not(eof(f)))do
 begin
-read(f,X);
-Writeln(X);
+readln(f,ch);
+if(upcase(ch[1])='A')then
+begin
+writeln(ch);
+end;
 end;
 close(f);
-Writeln('------------------------');
+end;
+
+
+procedure affi(var f:text);
+var
+c,i:char;
+ch: string; 
+begin
+for i:= 'A' to 'Z' do
+begin
+Writeln('La liste des ville dont le nom commence par ',i);
+reset(f);
+while not(eof(f))do
+begin
+readln(f,ch);
+if(upcase(ch[1])=i)then
+begin
+c:=ch[1];
+writeln(ch);
+end;
+end;
+if(not(ch[1] in ['A'..'Z']))then
+Writeln('Not found ');
+
+close(f);
+end;
+
 end;
 
 
 BEGIN
-Assign(f,'c:\caractere.car');
-Assign(f1,'c:\consonnes.car');
-Assign(f2,'c:\Voyelle.car');
-remplir(f);
-rempli_f(f,f1,f2);
+saisir_v(f);
+Writeln('La liste des ville dont le nom commence par ''A''');
 aff(f);
-readln;
-clrscr;
-aff(f1);
-readln;
-clrscr;
-aff(f2);
+Writeln('--------------------------------------------------');
+affi(f);
 END.

@@ -1,0 +1,105 @@
+program  ex ;
+uses wincrt ;
+type
+fiche = file of integer ;
+tab = array[1..100] of integer ;
+var
+f:fiche ;
+n: integer;
+t:tab ;
+
+procedure remplir(var f : fiche ; n :integer);
+var
+a,i: integer ;
+begin
+rewrite(f);
+a:=0;
+randomize;
+for i:= 1 to n do
+begin
+a:=random(1000);
+write(f,a);
+end;
+close(f);
+end;
+
+procedure transfere(var t:tab;var f:fiche; n: integer );
+var
+i,x: integer ;
+begin
+reset(f);
+for i := 1 to n do
+begin
+seek(f,i-1);
+read(f,x);
+t[i]:=x;
+end;
+close(f);
+end;
+
+procedure rei(var t:tab; n : integer );
+var
+ox,i,j:integer ;
+begin
+for i:= 1 to n-1 do
+begin
+ for j := i+1 to n do
+ begin
+  if(t[j]<t[i]) then
+  begin
+  ox:=t[i];
+  t[i]:=t[j];
+  t[j]:=ox;
+  end;
+  end;
+  end;
+  end;
+
+  procedure tr(var f :fiche;t:tab ; n: integer );
+  var
+  i:integer;
+  begin
+  rewrite(f);
+  for i := 1 to n do
+  begin
+  write(f,t[i]);
+  end;
+  close(f);
+  end;
+
+  procedure aff(t:tab ; n: integer);
+  var i: integer ;
+  begin
+  for i:= 1 to n do
+  begin
+  Write(t[i],'|');
+  end;
+  writeln;
+  Writeln('-----------------------------------------------');
+  end;
+
+
+  procedure aff_f(var f: fiche);
+  var
+  x: integer;
+  begin
+  reset(f);
+  while(not(eof(f)))do
+  begin
+  read(f,x);
+  writeln(x);
+  end;
+  close(f);
+  end;
+
+  BEGIN
+  assign(f,'c:\Tessting.dat');
+  Writeln('Sasir la tille');
+  readln(n);
+  remplir(f,n);
+  transfere(t,f,n);
+  rei(t,n);
+  aff(t,n);
+  tr(f,t,n);
+  aff_f(f);
+  END.

@@ -1,0 +1,44 @@
+program ex;
+uses wincrt;
+type
+tab=array[1..20] of integer ;
+var
+t:tab;
+i:integer ;
+
+Procedure remp(var t:tab );
+var
+i: integer;
+begin
+for i := 1 to 10 do
+begin
+readln(t[i]);
+end;
+end;
+
+procedure tri(var t:tab );
+var
+i,x,j: integer ;
+begin
+j:=0;
+for i := 2 to 11 do
+begin
+x:=t[i];
+j:=i;
+while(x<t[j-1])and(j>1)do
+begin
+t[j]:=t[j-1];
+j:=j-1;
+end;
+t[j]:=x;
+end;
+end;
+
+
+Begin
+remp(t);
+tri(t);
+for i:= 1 to 10 do
+write(t[i],'|'); 
+END.
+ 
