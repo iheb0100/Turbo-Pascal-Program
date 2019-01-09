@@ -1,0 +1,15 @@
+0) def fn recherche(t:tab ; n,d,f,x: entier): entier ; 
+1) si (x <t[ (d+f) div 2 ] ) alors 
+     recherche <== recherche(t,n,d,(d+f) div 2 , x)
+   sinon si (x>t[ (d+f) div 2 ] ) alors
+   recherche <== recherche(t,n,(d+f) div 2,f,x);
+   sinon si t[ (d+f) div 2 ] = x alors
+  recherche <== (d+f) div 2 
+  sinon 
+recherche <== 0 
+ fin si
+2)fin fn recherche 
+
+
+L'appelle en programme principalz
+ recherche(t,n,1,n,x);
